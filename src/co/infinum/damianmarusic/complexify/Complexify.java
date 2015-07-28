@@ -168,20 +168,45 @@ public class Complexify {
 	private int strengthScaleFactor;
 	private int minimumChars;
 
+	/**
+	 * Default constructor.
+	 *
+	 * Default params are:
+	 * banMode - ComplexifyBnaMode.STRICT
+	 * strengthScaleFactor - 1
+	 * minimumChars - 8
+	 *
+	 */
 	public Complexify() {
 		this(ComplexifyBanMode.STRICT, 1, 8);
 	}
 
+	/**
+	 * Construstor
+	 *
+	 *
+	 * @param banMode Use strict or loose comparisons for banned passwords. (default: ComplexifyBnaMode.STRICT)
+	 * @param strengthScaleFactor Required password strength multiplier (default: 1)
+	 * @param minimumChars Minimum password length (default: 8)
+	 */
 	public Complexify(ComplexifyBanMode banMode, int strengthScaleFactor, int minimumChars) {
 		this.banMode = banMode;
 		this.strengthScaleFactor = strengthScaleFactor;
 		this.minimumChars = minimumChars;
 	}
 
+	/**
+	 * Check the complexity of a password.
+	 *
+	 * @param password The password to check
+	 * @param listener Callback
+	 */
 	public void checkComplexityOfPassword(String password, ComplexityListener listener) {
 		double complexity = 0;
 
 		if (!isInBanList(password)) {
+
+			// Add character complexity
 			for (int i = CHARSETS_ARRAY.length - 1; i >= 0; i--) {
 				complexity += additionalComplexityForString(password, CHARSETS_ARRAY[i]);
 			}
