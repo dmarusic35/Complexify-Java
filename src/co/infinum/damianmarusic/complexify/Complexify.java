@@ -1,5 +1,9 @@
 package co.infinum.damianmarusic.complexify;
 
+import java.lang.Override;
+import java.lang.Runnable;
+import java.lang.Thread;
+
 /**
  * Created by Damian Marusic on 28.07.15..
  */
@@ -197,6 +201,8 @@ public class Complexify {
 
 	/**
 	 * Check the complexity of a password.
+     *
+     * Works synchronously.
 	 *
 	 * @param password The password to check
 	 * @param listener Callback
@@ -226,6 +232,24 @@ public class Complexify {
 
 		listener.onSuccess(valid, complexity);
 	}
+
+    /**
+     * Check the complexity of a password.
+     *
+     * Works asynchronously.
+     *
+     * @param password The password to check
+     * @param listener Callback
+     */
+    public void checkComplexityOfPasswordAsync(final String password, final ComplexityListener listener) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                checkComplexityOfPassword(password, listener);
+            }
+        }).start();
+
+    }
 
 	private int additionalComplexityForString(String string, int[] charset) {
 		for (int i = string.length() - 1; i >= 0; i--) {
