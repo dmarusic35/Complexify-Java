@@ -5,6 +5,8 @@ import java.lang.Runnable;
 import java.lang.Thread;
 
 /**
+ * Class for calculation of password complexity.
+ *
  * Created by Damian Marusic on 28.07.15..
  */
 public class Complexify {
@@ -176,7 +178,7 @@ public class Complexify {
 	 * Default constructor.
 	 *
 	 * Default params are:
-	 * banMode - ComplexifyBnaMode.STRICT
+	 * banMode - ComplexifyBanMode.STRICT
 	 * strengthScaleFactor - 1
 	 * minimumChars - 8
 	 *
